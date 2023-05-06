@@ -17,23 +17,23 @@ import lombok.Data;
 public class Servise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name="description", columnDefinition = "text")
+    @Column(name = "description", columnDefinition = "text")
     private String description;
 
-    @Column(name="duration")
+    @Column(name = "duration")
     private Integer duration;
 
-    @Column(name="base_price")
+    @Column(name = "base_price")
     private Float basePrice;
 
     // связь с таблицей заказа (там колонка - внешний ключ)
-    @ManyToMany(mappedBy = "servises")
+    @ManyToMany(mappedBy = "servises", targetEntity = Order.class)
     private List<Order> orders;
     
 }

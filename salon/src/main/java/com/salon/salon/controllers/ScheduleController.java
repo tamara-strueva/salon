@@ -15,39 +15,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.salon.salon.models.Master;
-import com.salon.salon.services.MasterService;
+import com.salon.salon.models.Schedule;
+import com.salon.salon.services.ScheduleService;
 
 @RestController
-@RequestMapping("/masters")
-public class MasterController {
+@RequestMapping("/schedules")
+public class ScheduleController {
     @Autowired
-    private MasterService masterService;
+    private ScheduleService scheduleService;
 
     @PostMapping("/add")
-    public void saveMaster(@RequestBody Master master) {
-        masterService.saveMaster(master);
+    public void saveSchedule(@RequestBody Schedule schedule) {
+        scheduleService.saveSchedule(schedule);
     }
 
     @GetMapping("/get")
-    public List<Master> getAllMastersList() {
-        return masterService.getAllMasters();
+    public List<Schedule> getAllSchedulesList() {
+        return scheduleService.getAllSchedules();
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteMasterById(@PathVariable Integer id) {
-        masterService.deleteMasterById(id);
+    public void deleteClient(@PathVariable Integer id) {
+        scheduleService.deleteScheduleById(id);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<?> updateClient(@RequestBody Master master, @PathVariable Integer id) {
+    @PutMapping("/edit/{id}") // ??
+    public ResponseEntity<?> updateClient(@RequestBody Schedule schedule, @PathVariable Integer id) {
         try {
-            Master baseMaster = masterService.getMasterById(id);
-            baseMaster.updateMaster(master);
-            masterService.saveMaster(baseMaster);
+            Schedule baseSchedule = scheduleService.getScheduleById(id);
+            baseSchedule.updateSchedule(schedule);
+            scheduleService.saveSchedule(baseSchedule);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch(NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } 
+        }
     }
 }

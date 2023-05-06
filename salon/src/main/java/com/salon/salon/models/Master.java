@@ -2,6 +2,8 @@ package com.salon.salon.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,11 +38,35 @@ public class Master {
     @Column(name = "rate")
     private Float rate;
 
+    // многие ко многим???
+    @JsonIgnore
     @OneToMany(mappedBy = "master_gr")
     private List<Schedule> schedules;
 
     // связь с таблицей заказа (там колонка - внешний ключ)
+    @JsonIgnore
     @OneToMany(mappedBy = "master")
     private List<Order> orders;
+
+    public void updateMaster(Master master) {
+        if(master.firstName != null) {
+            this.firstName = master.firstName;
+        }
+        if(master.lastName != null) {
+            this.lastName = master.lastName;
+        }
+        if(master.speciality != null) {
+            this.speciality = master.speciality;
+        }
+        if(master.workExperience != null) {
+            this.workExperience = master.workExperience;
+        }
+        if(master.rate != null) {
+            this.rate = master.rate;
+        }
+        if(master.schedules != null) {
+            this.schedules = master.schedules;
+        }
+    }
 
 }

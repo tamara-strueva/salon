@@ -35,4 +35,18 @@ public class Schedule {
     @Column(name="time_end")
     private Time timeEnd;
     
+    public void updateSchedule(Schedule schedule) {
+        if(schedule.master_gr != null) {
+            this.master_gr = schedule.master_gr;
+        }
+        if(schedule.day != null) {
+            this.day = schedule.day;
+        }
+        if(schedule.timeBegin != null) {
+            this.timeBegin = schedule.timeBegin;
+        }
+        if(schedule.timeEnd != null) {
+            this.timeEnd = schedule.timeEnd;
+        }
+    }
 }

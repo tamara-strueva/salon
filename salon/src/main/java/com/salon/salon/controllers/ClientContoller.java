@@ -1,5 +1,6 @@
 package com.salon.salon.controllers;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -27,6 +28,11 @@ public class ClientContoller {
     @Autowired
     private ClientService clientService;
 
+    @GetMapping("")
+    public String show() {
+        return "index";
+    }
+
     @PostMapping("/add")
     public void saveClient(@RequestBody Client client) {
         clientService.saveClient(client);
@@ -38,12 +44,32 @@ public class ClientContoller {
         return clientService.getAllClients();
     }
 
+    @GetMapping("/get/{id}")
+    public Client getClientById(@PathVariable Integer id) {
+        return clientService.getClientById(id);
+    }
+
+    @GetMapping("/getn/{name}")
+    public List<Client> getClientsByFirstName(@PathVariable String name) {
+        return clientService.getClientsByFirstName(name);
+    }
+
+    @GetMapping("/gets/{name}")
+    public List<Client> getClientsByLastName(@PathVariable String name) {
+        return clientService.getClientsByLastName(name);
+    }
+
+    @GetMapping("/getb/{date}")
+    public List<Client> getClientsByBirthDate(@PathVariable Date date) {
+        return clientService.getClientByBirthDate(date);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteClient(@PathVariable Integer id) {
         clientService.deleteClientById(id);
     }
 
-    @PutMapping("/edit/{id}") // ??
+    @PutMapping("/edit/{id}")
     public ResponseEntity<?> updateClient(@RequestBody Client client, @PathVariable Integer id) {
         try {
             Client baseClient = clientService.getClientById(id);
@@ -52,19 +78,6 @@ public class ClientContoller {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch(NoSuchElementException e){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        } 
     }
-    
-
-    // public ResponseEntity<?> update(@RequestBody Client client, @PathVariable Integer id){
-    //     try{
-    //         Client baseClient = clientService.getClientById(id);
-    //         baseClient.updateClient(client);
-    //         clientService.saveClient(baseClient);
-    //         return new ResponseEntity<>(HttpStatus.OK);
-
-    //     } catch(NoSuchElementException e){
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    // }
 }

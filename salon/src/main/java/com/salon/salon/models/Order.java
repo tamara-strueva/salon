@@ -1,7 +1,10 @@
 package com.salon.salon.models;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,25 +26,30 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    // @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "master_id")
     private Master master;
 
+    // @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "order_servise",
         joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "servise_id", referencedColumnName = "id"))
-    @JoinColumn(name = "service_id")
     private Set<Servise> servises;
 
+    @Column(name = "day")
+    private Date day;
+
     @Column(name = "time_begin")
-    private Timestamp timeBegin;
+    private Time timeBegin;
     
     @Column(name = "time_end")
-    private Timestamp timeEnd;
+    private Time timeEnd;
     
 }

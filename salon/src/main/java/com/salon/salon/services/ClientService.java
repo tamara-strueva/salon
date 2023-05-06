@@ -1,5 +1,6 @@
 package com.salon.salon.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,18 @@ public class ClientService {
 
     public Client getClientById(Integer id) {
         return clientRepository.findById(id).get();
+    }
+
+    public List<Client> getClientByBirthDate(Date birthDate) {
+        return clientRepository.findByBirthDate(birthDate);
+    }
+
+    public List<Client> getClientsByFirstName(String firstName) {
+        return clientRepository.findByFirstName(firstName);
+    }
+
+    public List<Client> getClientsByLastName(String lastName) {
+        return clientRepository.findByLastName(lastName);
     }
     
 }

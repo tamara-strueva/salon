@@ -24,8 +24,8 @@ public class ScheduleService {
         scheduleRepository.save(schedule);
     }
 
-    public void deleteSchedule(Schedule schedule) {
-        scheduleRepository.delete(schedule);
+    public void deleteScheduleById(Integer id) {
+        scheduleRepository.deleteById(id);
     }
     
     public Schedule getScheduleById(Integer id) {

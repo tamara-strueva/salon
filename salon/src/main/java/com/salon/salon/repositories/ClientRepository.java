@@ -11,7 +11,6 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
     List<Client> findByFirstName(String firstName);
     List<Client> findByLastName(String lastName);
     List<Client> findByFirstNameAndLastName(String firstName, String lastName);
-    // birthDate
-    List<Client> findByBirthDate(Date birthDate); //
+    List<Client> findByBirthDate(Date birthDate); // поиск клиентов по дате рождения
     
 }
