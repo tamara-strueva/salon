@@ -30,8 +30,12 @@ public class ServiseController {
         return serviceService.getAllServises();
     }
 
+    // get by id
+
     @DeleteMapping("/delete/{id}")
     public void deleteServiseById(@PathVariable Integer id) {
         serviceService.deleteServiseById(id);
     }
+
+    // update
 }

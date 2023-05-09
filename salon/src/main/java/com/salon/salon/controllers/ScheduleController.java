@@ -34,6 +34,8 @@ public class ScheduleController {
         return scheduleService.getAllSchedules();
     }
 
+    // get by id
+
     @DeleteMapping("/delete/{id}")
     public void deleteClient(@PathVariable Integer id) {
         scheduleService.deleteScheduleById(id);

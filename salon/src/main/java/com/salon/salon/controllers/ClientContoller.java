@@ -2,7 +2,6 @@ package com.salon.salon.controllers;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.salon.salon.exceptions.ClientNotFoundExсeption;
+import com.salon.salon.exceptions.CustomNotFoundExсeption;
 import com.salon.salon.models.Client;
 import com.salon.salon.services.ClientService;
 
@@ -36,7 +37,6 @@ public class ClientContoller {
     @PostMapping("/add")
     public void saveClient(@RequestBody Client client) {
         clientService.saveClient(client);
-        log.info("INSERT {}, {}, {}", client.getFirstName(), client.getLastName(), client.getBirthDate());
     }
 
     @GetMapping("/get")
@@ -45,23 +45,45 @@ public class ClientContoller {
     }
 
     @GetMapping("/get/{id}")
-    public Client getClientById(@PathVariable Integer id) {
-        return clientService.getClientById(id);
+    public ResponseEntity<Client> getClientById(@PathVariable Integer id) {
+        try{
+            Client client = clientService.getClientById(id);
+            return ResponseEntity.ok(client);
+        } catch (ClientNotFoundExсeption exeption) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Client with ID: " + id + " doesn't exist...");
+        }
+        
     }
 
     @GetMapping("/getn/{name}")
-    public List<Client> getClientsByFirstName(@PathVariable String name) {
-        return clientService.getClientsByFirstName(name);
+    public ResponseEntity<?> getClientsByFirstName(@PathVariable String name) {
+        try{
+            List<Client> clients = clientService.getClientsByFirstName(name);
+            log.info("FIRSTNME {}", name);
+            return ResponseEntity.ok(clients);
+        } catch (ClientNotFoundExсeption exсeption) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Client with NAME: " + name + " doesn't exist...");
+        }
     }
 
     @GetMapping("/gets/{name}")
-    public List<Client> getClientsByLastName(@PathVariable String name) {
-        return clientService.getClientsByLastName(name);
+    public ResponseEntity<?> getClientsByLastName(@PathVariable String name) {
+        try{
+            List<Client> clients = clientService.getClientsByLastName(name);
+            return ResponseEntity.ok(clients);
+        } catch (ClientNotFoundExсeption exсeption) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Client with SURNAME: " + name + " doesn't exist...");
+        }
     }
 
     @GetMapping("/getb/{date}")
-    public List<Client> getClientsByBirthDate(@PathVariable Date date) {
-        return clientService.getClientByBirthDate(date);
+    public ResponseEntity<?> getClientsByBirthDate(@PathVariable Date date) {
+        try{
+            List<Client> clients = clientService.getClientByBirthDate(date);
+            return ResponseEntity.ok(clients);
+        } catch (ClientNotFoundExсeption exсeption) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Client with BIRTHDATE: " + date + " doesn't exist...");
+        }
     }
 
     @DeleteMapping("/delete/{id}")
@@ -75,9 +97,9 @@ public class ClientContoller {
             Client baseClient = clientService.getClientById(id);
             baseClient.updateClient(client);
             clientService.saveClient(baseClient);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch(NoSuchElementException e){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.ok(baseClient);
+        } catch(ClientNotFoundExсeption exception){
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Client with ID: " + id + " doesn't exist...");
         } 
     }
 }

@@ -35,5 +35,20 @@ public class Servise {
     // связь с таблицей заказа (там колонка - внешний ключ)
     @ManyToMany(mappedBy = "servises", targetEntity = Order.class)
     private List<Order> orders;
+
+    public void updateServise(Servise servise) {
+        if(servise.name != null) {
+            this.name = servise.name;
+        }
+        if(servise.description != null) {
+            this.description = servise.description;
+        }
+        if(servise.duration != null) {
+            this.duration = servise.duration;
+        }
+        if(servise.basePrice != null) {
+            this.basePrice = servise.basePrice;
+        }
+    }
     
 }

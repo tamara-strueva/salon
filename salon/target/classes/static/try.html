@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome</title>
+        <meta charset="utf-8">
+        <meta lang="ru">
+    </head>
+    <body> 
+        <h3>try...</h3>
+        <!-- <div> -->
+            <button onclick=show()>show all</button>
+
+            <!--<div class="wrapper">
+                <div class="clients_list">
+                    
+                </div>
+            </div>
+        </div> -->
+        
+        <script>
+            function show() {
+                fetch("http://localhost:8082/clients/get")
+                .then(response => response.json()) 
+                .then(clients => console.log(clients))
+            }
+            
+        </script>
+
+        <div>
+            <lable>Name</lable>
+            <input type="text" name="firstName">
+        </div>
+        <div>
+            <lable>Last Name</lable>
+            <input type="text" name="lastName">
+        </div>
+        <!-- <button name="complete" onclick=show()>show</button> -->
+        <button name="complete" onclick=add()>add</button>
+
+        <script>
+            function add(){
+            var firstName = document.getElementsByName("firstName")[0].value
+            var lastName = document.getElementsByName("lastName")[0].value
+            var data = JSON.stringify({"firstName": firstName, "lastName": lastName})
+            // console.log(lastName)
+            // console.log(JSON.stringify({"firstName": firstName, "lastName": lastName}))
+            // fetch('http://localhost:8082/clients/add', {method: "POST",
+            // body: data})
+            // .then(data => console.log(data))
+            }
+        </script>
+
+        <!-- <script>
+            var firstName = document.getElementsByName("firstName")
+            // document.getElementsByName("complete").onclick = function() {show()}
+            function show() {
+                // var firstName = document.getElementsByName("firstName")
+                document.getElementByName("name").innerHTML = firstName
+                console.log(firstName)
+            }    
+            // var firstName = document.getElementsByName("firstName")
+            // console.log(firstName)
+
+            // document.getElementById("demo").onclick = function() {myFunction()};
+            // function myFunction() {
+            // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";}
+        </script> -->
+        <!-- <script>
+            fetch('http://localhost:8082/clients/gets/Иванова') // обращение по адресу как в посмане
+            .then(response => response.json()) // переделывает данные в json
+            // .then(clients => alert(clients)); // выводит список из object Object
+            .then(clients => console.log(clients)) // нормально выводит в консоль браузера и пошел запрос через hibernate
+            
+            // как делать все методы
+            // как из инпута выводить на сайт
+        </script> -->
+    </body>
+</html>

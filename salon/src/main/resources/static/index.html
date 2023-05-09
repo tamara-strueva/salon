@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Welcome</title>
+        <title>Main</title>
         <meta charset="utf-8">
         <meta lang="ru">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     </head>
-    <body> 
-        <h3>try...</h3>
-        <!-- <form>
-            <lable>Name</lable>
-            <input type="text" name="firstName">
-            <button type="submit">show</button>
-        </form>
-        <script>
-            var firstName = document.getElementsByName("firstName")
-            // alert(firstName)
-            console.log(firstName)
-        </script> -->
-        <script>
-            fetch('http://localhost:8082/clients/gets/Иванова') // обращение по адресу как в посмане
-            .then(response => response.json()) // переделывает данные в json
-            // .then(clients => alert(clients)); // выводит список из object Object
-            .then(clients => console.log(clients)) // нормально выводит в консоль браузера и пошел запрос через hibernate
+    <body>
+        <nav class="nav">
+            <a class="nav-link disabled" href="#!">Главная</a>
+            <a class="nav-link active" href="./masters.html">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
+            <a class="nav-link active" href="./services.html">Услуги</a> <!-- ссылка на просмотр всех услуг -->
+            <a class="nav-link active" href="./clients.html">Клиенты</a>
+        </nav>
+
+        <!-- запихнуть картинку -->
+
+
+        <!-- <button onclick="showList()">show all</button>
+
+        <script src="./js/show.js"></script>
+
+        <form id="form">
+            <div>
+                <lable>Name</lable>
+                <input name="firstName">
+            </div>
+            <div>
+                <lable>Last name</lable>
+                <input name="lastName">
+            </div>
             
-            // как делать все методы
-            // как из инпута выводить на сайт
-        </script>
+            <button type="submit">add</button>
+
+            <script src="./js/create.js"></script>
+
+        </form> -->
     </body>
 </html>

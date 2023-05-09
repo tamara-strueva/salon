@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.salon.salon.exceptions.CustomNotFoundExсeption;
+import com.salon.salon.exceptions.MasterNotFoundException;
+// import com.salon.salon.exeptions.MasterNotFoundException;
 import com.salon.salon.models.Master;
 import com.salon.salon.services.MasterService;
 
@@ -32,6 +35,36 @@ public class MasterController {
     @GetMapping("/get")
     public List<Master> getAllMastersList() {
         return masterService.getAllMasters();
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Master> getMasterById(@PathVariable Integer id) {
+        try{
+            Master master = masterService.getMasterById(id);
+            return ResponseEntity.ok(master);
+        } catch (MasterNotFoundException exception) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with ID: " + id + "doesn't exist...");
+        }
+    }
+
+    @GetMapping("/getn/{name}")
+    public ResponseEntity<?> getMastersByName(@PathVariable String name) {
+        try{
+            List<Master> masters = masterService.getMastersByName(name);
+            return ResponseEntity.ok(masters);
+        } catch (MasterNotFoundException exception) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with NAME: " + name + "doesn't exist...");
+        }
+    }
+    
+    @GetMapping("/gets/{speciality}")
+    public ResponseEntity<?> getMastersBySpeciality(@PathVariable String speciality) {
+        try{
+            List<Master> masters = masterService.getMastersBySpeciality(speciality);
+            return ResponseEntity.ok(masters);
+        } catch (MasterNotFoundException exception) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with SPECIALITY: " + speciality + "doesn't exist...");
+        }
     }
 
     @DeleteMapping("/delete/{id}")

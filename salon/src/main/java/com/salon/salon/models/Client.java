@@ -53,6 +53,9 @@ public class Client {
         if(client.phoneNumber != null) {
             this.phoneNumber = client.phoneNumber;
         }
+        if(client.orders != null) {
+            this.orders = client.orders;
+        }
     }
 
 }

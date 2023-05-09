@@ -51,5 +51,28 @@ public class Order {
     
     @Column(name = "time_end")
     private Time timeEnd;
-    
+
+    @Column(name = "date_of_creation")
+    private Date dateOfCreation;
+
+    @Column(name = "date_of_edit")
+    private Date dateOfEdit;
+
+    public void updateOrder(Order order) {
+        if(order.master != null) {
+            this.master = order.master;
+        }
+        if(order.client != null) {
+            this.client = order.client;
+        }
+        if(order.day != null) {
+            this.day = order.day;
+        }
+        if(order.timeBegin != null) {
+            this.timeBegin = order.timeBegin;
+        }
+        if(order.timeEnd != null) {
+            this.timeEnd = order.timeEnd;
+        }
+    }
 }

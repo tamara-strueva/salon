@@ -67,6 +67,9 @@ public class Master {
         if(master.schedules != null) {
             this.schedules = master.schedules;
         }
+        if(master.orders != null) {
+            this.orders = master.orders;
+        }
     }
 
 }

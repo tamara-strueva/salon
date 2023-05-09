@@ -31,5 +31,13 @@ public class MasterService {
     public Master getMasterById(Integer id) {
         return masterRepository.findById(id).get();
     }
+
+    public List<Master> getMastersByName(String name) {
+        return masterRepository.findByFirstName(name);
+    }
+
+    public List<Master> getMastersBySpeciality(String speciality) {
+        return masterRepository.findBySpeciality(speciality);
+    }
     
 }
