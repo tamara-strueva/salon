@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.salon.salon.models.Client;
 import com.salon.salon.models.Order;
 import com.salon.salon.repositories.OrderRepository;
 
@@ -30,6 +31,10 @@ public class OrderService {
 
     public Order getOrderById(Integer id) {
         return orderRepository.findById(id).get();
+    }
+
+    public List<Order> getOrderByClient(Client client) {
+        return orderRepository.findByClient(client);
     }
     
 }

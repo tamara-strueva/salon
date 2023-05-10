@@ -15,15 +15,29 @@
             <a class="nav-link active" href="./clients.html">Клиенты</a>
             <button class="btn btn-success" type="button" onclick="showMastersList()">show</button>
         </nav>
+        <div class="container-fluid">
+            <table class="table table-sm" id="mastersTable" height="100%" width="100%">
+                <thead>
+                    <!-- <tr> <th>id</th> <th><input type="text" placeholder="Имя"></th> <th>Специальность</th> </tr> -->
+                <tr> <th>id</th> 
+                    <th><input type="text" placeholder="Имя" id="firstName"></th> 
+                    <th><input type="text" placeholder="Фамилия" id="lastName"></th>
+                    <th><input type="text" placeholder="Специальность" id="speciality"></th> 
+                    <th>Опыт работы</th></tr>
+                    <!--как выводить график работы и доюавить кнопки (удалить редактировать новая запись)-->
+                </thead>
+                <tbody id="mastersTableBody">
+                    <script src="./js/showAllMasters.js"></script>
+                </tbody>
+            </table>
 
-        <table class="table table-striped" id="mastersTable">
-            <thead>
-              <tr> <th>id</th> <th><input type="text" placeholder="Имя"></th> <th>Специальность</th> </tr>
-            </thead>
-            <tbody id="mastersTableBody">
-                <script src="./js/showAllMasters.js"></script>
-            </tbody>
-        </table>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary" onclick="showMastersByName()">По имени</button>
+                <button type="button" class="btn btn-secondary" onclick="showMastersByLastName()">По фамилии</button>
+                <button type="button" class="btn btn-secondary" onclick="showMastersBySpeciality()">По специальности</button>
+              </div>
+
+        </div>
 
     </body>
 </html>

@@ -56,6 +56,16 @@ public class MasterController {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with NAME: " + name + "doesn't exist...");
         }
     }
+
+    @GetMapping("/getl/{name}")
+    public ResponseEntity<?> getMastersByLastName(@PathVariable String name) {
+        try{
+            List<Master> masters = masterService.getMasterByLastName(name);
+            return ResponseEntity.ok(masters);
+        } catch (MasterNotFoundException exception) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with LASTNAME: " + name + "doesn't exist...");
+        }
+    }
     
     @GetMapping("/gets/{speciality}")
     public ResponseEntity<?> getMastersBySpeciality(@PathVariable String speciality) {

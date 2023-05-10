@@ -2,6 +2,7 @@ package com.salon.salon.controllers;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/clients")
 public class ClientContoller {
     @Autowired
-    private ClientService clientService;
+    public ClientService clientService;
 
     @GetMapping("")
     public String show() {
@@ -49,7 +50,7 @@ public class ClientContoller {
         try{
             Client client = clientService.getClientById(id);
             return ResponseEntity.ok(client);
-        } catch (ClientNotFoundExсeption exeption) {
+        } catch (NoSuchElementException exeption) {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Client with ID: " + id + " doesn't exist...");
         }
         

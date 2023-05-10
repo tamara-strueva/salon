@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.salon.salon.models.Client;
 import com.salon.salon.models.Order;
+import com.salon.salon.services.ClientService;
 import com.salon.salon.services.OrderService;
 
 @RestController
@@ -19,10 +21,18 @@ import com.salon.salon.services.OrderService;
 public class OrderContoller {
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private ClientService clientService;
 
     @GetMapping("/get")
     public List<Order> getAllOrdersList() {
         return orderService.getAllOrders();
+    }
+
+    @GetMapping("/getc/{id}")
+    public List<Order> getOrderByClient(@PathVariable Integer id) {
+        Client client = clientService.getClientById(id);
+        return orderService.getOrderByClient(client);
     }
 
     @PostMapping("/add")
