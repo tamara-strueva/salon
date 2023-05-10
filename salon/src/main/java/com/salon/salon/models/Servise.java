@@ -2,11 +2,15 @@ package com.salon.salon.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -33,7 +37,11 @@ public class Servise {
     private Float basePrice;
 
     // связь с таблицей заказа (там колонка - внешний ключ)
-    @ManyToMany(mappedBy = "servises", targetEntity = Order.class)
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "service_order",
+        joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
     private List<Order> orders;
 
     public void updateServise(Servise servise) {

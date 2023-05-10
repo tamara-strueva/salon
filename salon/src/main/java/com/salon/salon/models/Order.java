@@ -2,9 +2,9 @@ package com.salon.salon.models;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Set;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -26,22 +25,16 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    // @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "master_id")
     private Master master;
 
-    // @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "order_servise",
-        joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "servise_id", referencedColumnName = "id"))
-    private Set<Servise> servises;
+    @ManyToMany(mappedBy = "orders", targetEntity = Servise.class)
+    private List<Servise> services;
 
     @Column(name = "day")
     private Date day;
@@ -64,6 +57,19 @@ public class Order {
         }
         if(order.client != null) {
             this.client = order.client;
+        }
+        if(order.services != null){
+            // this.services.addAll(order.services);
+
+            List<Servise> newList = Stream.concat(this.services.stream(), order.services.stream()).collect(Collectors.toList());
+            this.services = newList;
+
+            // for(int i = 0; i < order.services.size(); i++) {
+            //     this.services.add(order.services.get(i));
+            // }
+            // for(Servise servise: order.services) {
+            //     this.services.add(servise);
+            // }
         }
         if(order.day != null) {
             this.day = order.day;
