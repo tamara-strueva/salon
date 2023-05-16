@@ -1,9 +1,11 @@
 package com.salon.salon.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,11 +40,11 @@ public class Servise {
 
     // связь с таблицей заказа (там колонка - внешний ключ)
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(name = "service_order",
         joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
-    private List<Order> orders;
+    private List<Order> orders = new ArrayList<>();
 
     public void updateServise(Servise servise) {
         if(servise.name != null) {
@@ -59,4 +61,7 @@ public class Servise {
         }
     }
     
+    public void addNewOrder(Order newOrder) {
+        this.orders.add(newOrder);
+    }
 }

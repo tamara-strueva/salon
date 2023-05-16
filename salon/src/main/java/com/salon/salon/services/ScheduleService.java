@@ -1,10 +1,12 @@
 package com.salon.salon.services;
 
+import java.sql.Time;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.salon.salon.models.Master;
 import com.salon.salon.models.Schedule;
 import com.salon.salon.repositories.ScheduleRepository;
 
@@ -30,6 +32,14 @@ public class ScheduleService {
     
     public Schedule getScheduleById(Integer id) {
         return scheduleRepository.findById(id).get();
+    }
+
+    public List<Schedule> getScheduleByMaster(Master master) {
+        return scheduleRepository.findByMaster(master);
+    }
+
+    public List<Schedule> getScheduleByTimeBegin(Time time) {
+        return scheduleRepository.findByTimeBegin(time);
     }
 
 }

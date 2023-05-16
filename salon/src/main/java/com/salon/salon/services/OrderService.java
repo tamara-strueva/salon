@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.salon.salon.models.Client;
 import com.salon.salon.models.Order;
-import com.salon.salon.models.Servise;
 import com.salon.salon.repositories.OrderRepository;
 
 import jakarta.transaction.Transactional;
@@ -36,10 +35,6 @@ public class OrderService {
 
     public List<Order> getOrderByClient(Client client) {
         return orderRepository.findByClient(client);
-    }
-
-    public void insertRelationTable(Order order, Servise servise) {
-        orderRepository.insertRelationTable(order.getId(), servise.getId());
     }
     
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Schedule</title>
+        <meta charset="utf-8">
+        <meta lang="ru">
+        <!-- <script src="./js/showAllTable.js"></script> -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="nav">
+            <a class="nav-link active" href="./index.html">Главная</a>
+            <a class="nav-link disabled" href="./masters.html">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
+            <a class="nav-link active" href="./services.html">Услуги</a> <!-- ссылка на просмотр всех услуг -->
+            <a class="nav-link active" href="./clients.html">Клиенты</a>
+        </nav>
+        <div class="container-fluid">
+            <table class="table table-sm" id="mastersTable" height="100%" width="100%">
+                <thead>
+                    <!-- <tr> <th>id</th> <th><input type="text" placeholder="Имя"></th> <th>Специальность</th> </tr> -->
+                <tr> <th>id</th> 
+                    <th><input type="text" placeholder="ФИ мастера" id="master"></th>
+                    <th><input type="text" placeholder="День" id="day"></th> 
+                    <th><input type="text" placeholder="Время начала" id="timeBegin"></th>
+                    <th>Время окончания</th> 
+                </tr> 
+                </thead>
+                <tbody id="schedulesTableBody">
+                    <script src="./js/schedule.js"></script>
+                </tbody>
+            </table>
+
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-secondary" onclick="getScheduleByMaster()">По мастеру</button>
+                <button type="button" class="btn btn-secondary" onclick="getScheduleByDay()">По дню</button>
+                <button type="button" class="btn btn-secondary" onclick="getScheduleByTimeBegin()">По началу</button>
+            </div>
+
+        </div>
+    </body>
+</html>

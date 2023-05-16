@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +22,11 @@ import com.salon.salon.models.Order;
 import com.salon.salon.models.Servise;
 import com.salon.salon.services.ClientService;
 import com.salon.salon.services.OrderService;
+import com.salon.salon.services.ServiseService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/orders")
 public class OrderContoller {
@@ -29,6 +34,8 @@ public class OrderContoller {
     private OrderService orderService;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private ServiseService serviseService;
 
     @GetMapping("/get")
     public List<Order> getAllOrdersList() {
@@ -50,7 +57,18 @@ public class OrderContoller {
 
     @PostMapping("/add")
     public void saveOrder(@RequestBody Order order) {
-        orderService.saveOrder(order);
+               
+        try{
+            orderService.saveOrder(order);
+            List<Servise> servises = order.getServices();
+            for(Servise servise: servises) {
+                serviseService.insertRelationTable(order, servise);
+            }
+        } catch (DataIntegrityViolationException exception) {
+            Client client = order.getClient();
+            clientService.saveClient(client);
+            orderService.saveOrder(order);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
@@ -65,11 +83,14 @@ public class OrderContoller {
             // новая услуга должна сохраниться в результирующую таблицу manytomany
             Order baseOrder = orderService.getOrderById(id);
             baseOrder.updateOrder(order);
-            // orderService.saveOrder(baseOrder);
             List<Servise> servisesToAdd = order.getServices();
             for(Servise servise: servisesToAdd) {
-                orderService.insertRelationTable(baseOrder, servise);
+                baseOrder.getServices().add(servise);
+                servise.getOrders().add(baseOrder);
+                // orderService.insertRelationTable(baseOrder, servise);
             }
+            log.info("1 LIST {}", baseOrder.getServices().get(0).getOrders());
+            log.info("2 LIST {}", baseOrder.getServices());
             orderService.saveOrder(baseOrder);
             return ResponseEntity.ok(baseOrder);
         } catch(NoSuchElementException exception) {

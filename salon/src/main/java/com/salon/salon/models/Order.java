@@ -3,9 +3,8 @@ package com.salon.salon.models;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +32,7 @@ public class Order {
     @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToMany(mappedBy = "orders", targetEntity = Servise.class)
+    @ManyToMany(mappedBy = "orders", targetEntity = Servise.class, cascade=CascadeType.MERGE)
     private List<Servise> services;
 
     @Column(name = "day")
@@ -58,11 +57,14 @@ public class Order {
         if(order.client != null) {
             this.client = order.client;
         }
-        if(order.services != null){
+        // if(order.services != null){
             // this.services.addAll(order.services);
-
-            List<Servise> newList = Stream.concat(this.services.stream(), order.services.stream()).collect(Collectors.toList());
-            this.services = newList;
+            // this.setNewServises(order.getServices());
+            // for(Servise servise: order.getServices()) {
+            //     servise.addNewOrder(this);
+            // }
+            // List<Servise> newList = Stream.concat(this.services.stream(), order.services.stream()).collect(Collectors.toList());
+            // this.services = newList;
 
             // for(int i = 0; i < order.services.size(); i++) {
             //     this.services.add(order.services.get(i));
@@ -70,7 +72,7 @@ public class Order {
             // for(Servise servise: order.services) {
             //     this.services.add(servise);
             // }
-        }
+        // }
         if(order.day != null) {
             this.day = order.day;
         }
@@ -79,6 +81,12 @@ public class Order {
         }
         if(order.timeEnd != null) {
             this.timeEnd = order.timeEnd;
+        }
+    }
+
+    public void setNewServises(List<Servise> newServises) {
+        for(Servise servise: newServises) {
+            this.services.add(servise);
         }
     }
 }

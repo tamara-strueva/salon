@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit master</title>
+        <meta charset="utf-8">
+        <meta lang="ru">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <script language="javascript" type="text/javascript">
+            function OnLoad() {
+                var query = window.location.href; // результат - строка запроса без адреса страницы "id=someName&userMail=some@mail.com&usText=MemoText"
+                console.log(query)
+            // var params = query.split("&");  // результат - массив строк из пар "id=someName", "userMail=some@mail.com", "usText=MemoText"
+            // // теперь брать по очереди
+            // document.getElementById("UsName").innerHTML = params[0].split("=")[1];
+            // document.getElementById("userMail").innerHTML = params[1].split("=")[1];
+            // document.getElementById("usText").innerHTML = params[2].split("=")[1];
+            }
+        </script>
+    </head>
+    <body onload="OnLoad()">
+
+    </body>
+</html>

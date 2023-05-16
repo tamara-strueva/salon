@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-// import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -33,14 +32,14 @@ public class Master {
     private String speciality;
 
     @Column(name = "work_experience")
-    private Integer workExperience;
+    private String workExperience = "0";
 
     @Column(name = "rate")
     private Float rate;
 
     // многие ко многим???
     @JsonIgnore
-    @OneToMany(mappedBy = "master_gr")
+    @OneToMany(mappedBy = "master")
     private List<Schedule> schedules;
 
     // связь с таблицей заказа (там колонка - внешний ключ)

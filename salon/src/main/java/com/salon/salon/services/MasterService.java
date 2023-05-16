@@ -40,6 +40,10 @@ public class MasterService {
         return masterRepository.findByLastName(lastName);
     }
 
+    public List<Master> getMasterByFirstAndLastName(String firstName, String LastName) {
+        return masterRepository.findByFirstNameAndLastName(firstName, LastName);
+    }
+
     public List<Master> getMastersBySpeciality(String speciality) {
         return masterRepository.findBySpeciality(speciality);
     }

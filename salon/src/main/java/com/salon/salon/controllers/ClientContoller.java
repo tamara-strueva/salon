@@ -77,6 +77,16 @@ public class ClientContoller {
         }
     }
 
+    @GetMapping("/getfl/{firstName}/{lastName}")
+    public ResponseEntity<?> getClientsByFirstAndLastName(@PathVariable String firstName, @PathVariable String lastName) {
+        try{
+            List<Client> clients = clientService.getClientsByFirstAndLastName(firstName, lastName);
+            return ResponseEntity.ok(clients);
+        } catch (ClientNotFoundExсeption exсeption) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Client with Name: " + firstName + " " + lastName + " doesn't exist...");
+        }
+    }
+
     @GetMapping("/getb/{date}")
     public ResponseEntity<?> getClientsByBirthDate(@PathVariable Date date) {
         try{

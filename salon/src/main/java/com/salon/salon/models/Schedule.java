@@ -24,7 +24,7 @@ public class Schedule {
 
     @ManyToOne
     @JoinColumn(name = "master_schedule_id")
-    private Master master_gr;
+    private Master master;
 
     @Column(name = "day")
     private Date day;
@@ -36,8 +36,8 @@ public class Schedule {
     private Time timeEnd;
     
     public void updateSchedule(Schedule schedule) {
-        if(schedule.master_gr != null) {
-            this.master_gr = schedule.master_gr;
+        if(schedule.master != null) {
+            this.master = schedule.master;
         }
         if(schedule.day != null) {
             this.day = schedule.day;

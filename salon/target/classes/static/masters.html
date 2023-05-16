@@ -12,8 +12,7 @@
             <a class="nav-link active" href="./index.html">Главная</a>
             <a class="nav-link disabled" href="#!">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
             <a class="nav-link active" href="./services.html">Услуги</a> <!-- ссылка на просмотр всех услуг -->
-            <a class="nav-link active" href="./clients.html">Клиенты</a>
-            <button class="btn btn-success" type="button" onclick="showMastersList()">show</button>
+            <!-- <a class="nav-link active" href="./clients.html">Клиенты</a> -->
         </nav>
         <div class="container-fluid">
             <table class="table table-sm" id="mastersTable" height="100%" width="100%">
@@ -23,7 +22,9 @@
                     <th><input type="text" placeholder="Имя" id="firstName"></th> 
                     <th><input type="text" placeholder="Фамилия" id="lastName"></th>
                     <th><input type="text" placeholder="Специальность" id="speciality"></th> 
-                    <th>Опыт работы</th></tr>
+                    <th>Опыт работы</th>
+                    <th>Действия</th>
+                </tr>
                     <!--как выводить график работы и доюавить кнопки (удалить редактировать новая запись)-->
                 </thead>
                 <tbody id="mastersTableBody">
@@ -32,10 +33,15 @@
             </table>
 
             <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-success" onclick=""><a href="" target="_blank">Добавить мастера</a></button>
                 <button type="button" class="btn btn-secondary" onclick="showMastersByName()">По имени</button>
                 <button type="button" class="btn btn-secondary" onclick="showMastersByLastName()">По фамилии</button>
                 <button type="button" class="btn btn-secondary" onclick="showMastersBySpeciality()">По специальности</button>
-              </div>
+                <button type="button" class="btn btn-secondary" onclick="showMastersList()">Все мастера</button>
+            </div>
+        </div>
+
+        <div  id="edit">
 
         </div>
 

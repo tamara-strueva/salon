@@ -12,19 +12,18 @@
             <a class="nav-link active" href="./masters.html">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
             <a class="nav-link active" href="./services.html">Услуги</a> <!-- ссылка на просмотр всех услуг -->
             <a class="nav-link active" href="./clients.html">Клиенты</a>
-            <button class="btn btn-success" type="button" onclick="showOrdersList()">show</button>
         </nav>
 
         <div class="container-fluid">
             <table class="table table-sm" id="ordersTable" height="100%" width="100%">
                 <thead>
-                    <!-- <tr> <th>id</th> <th><input type="text" placeholder="Имя"></th> <th>Специальность</th> </tr> -->
                 <tr> <th>id</th> 
                     <th><input type="text" placeholder="Мастер" id="master"></th> 
                     <th><input type="text" placeholder="Клиент" id="client"></th>
                     <th><input type="text" placeholder="Услуга" id="service"></th> 
-                    <th>Дата</th></tr>
-                    <!--как выводить график работы и доюавить кнопки (удалить редактировать новая запись)-->
+                    <th><input type="text" placeholder="Дата" id="date"></th>
+                    <th>Действия</th>
+                </tr>
                 </thead>
                 <tbody id="ordersTableBody">
                     <script src="./js/showAllOrders.js"></script>
@@ -35,6 +34,14 @@
             имя клиента / имя мастера / ?услуга? / время начала / время окончания / 
             ** время окончания = время начала + длина услуги
         -->
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-success"><a href="./createForm.html" target="_blank">Новая запись</a></button>
+            <button type="button" class="btn btn-secondary" onclick="">По мастеру</button>
+            <button type="button" class="btn btn-secondary" onclick="">По клиенту</button>
+            <button type="button" class="btn btn-secondary" onclick="">По услуге</button>
+            <button type="button" class="btn btn-secondary" onclick="">По дате</button>
+            <button type="button" class="btn btn-secondary" onclick="showOrdersList()">Все данные</button>
+        </div>
 
     </body>
 </html>

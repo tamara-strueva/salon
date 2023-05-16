@@ -12,17 +12,27 @@
             <a class="nav-link active" href="./index.html">Главная</a>
             <a class="nav-link active" href="./masters.html">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
             <a class="nav-link disabled" href="#!">Услуги</a> <!-- ссылка на просмотр всех услуг -->
-            <a class="nav-link active" href="./clients.html">Клиенты</a>
-            <button class="btn btn-success" type="button" onclick="showServicesList()" >show</button>
+            <!-- <a class="nav-link active" href="./clients.html">Клиенты</a> -->
         </nav>
 
         <table class="table table-striped" id="servicesTable">
             <thead>
-              <tr> <th>id</th> <th><input type="text" placeholder="Название"></th> </tr>
+                <tr> 
+                    <th>id</th> 
+                    <th><input type="text" placeholder="Название" id="name"></th>
+                    <th>Продолжительность</th>
+                    <th>Цена</th>
+                </tr>
             </thead>
             <tbody id="servicesTableBody">
                 <script src="./js/showAllServices.js"></script>
             </tbody>
-          </table>
+        </table>
+
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" onclick="showServicesByName()">По названию</button>
+            <button type="button" class="btn btn-secondary" onclick="showServicesList()">Все</button>
+        </div>
+
     </body>    
 </html>

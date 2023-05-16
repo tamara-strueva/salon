@@ -44,5 +44,9 @@ public class ClientService {
     public List<Client> getClientsByLastName(String lastName) {
         return clientRepository.findByLastName(lastName);
     }
-    
+
+    public List<Client> getClientsByFirstAndLastName(String firstName, String lastName) {
+        return clientRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
+        
 }
