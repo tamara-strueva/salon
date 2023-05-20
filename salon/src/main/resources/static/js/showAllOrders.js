@@ -6,13 +6,91 @@ function showOrdersList() {
 const ordersTable = document.getElementById('ordersTableBody')
 
 // http://localhost:8082/orders/getm by master
+function showOrdersByMaster() {
+    const master  = document.getElementById("master").value
+
+    if(master == "") {
+        catchErrors("Поле ввода мастера пустое!")
+    } else {
+        const mastSp = master.toLowerCase()
+        fetch(`http://localhost:8082/orders/getms/${mastSp}`)
+        .then(response => response.json())
+        .then(orders => {
+            if(orders.length == 0) {
+                const mastName = capitalizeFirstLetter(master)
+                fetch(`http://localhost:8082/orders/getmn/${mastName}`)
+                .then(response => response.json())
+                // .then(res => console.log(res))
+                .then(orderss => {
+                    if(orderss.length == 0) {
+                        catchErrors("Информация не найдена!")
+                    } else {
+                        createTableOrders(ordersTable, orderss)
+                    }
+                })
+            } else {
+                createTableOrders(ordersTable, orders)
+            }
+        })
+    }
+}
+
 // http://localhost:8082/orders/getc by client
+function showOrdersByClient() {
+    const client = document.getElementById("client").value
+
+    if(client == "") {
+        catchErrors("Поле ввода клиента пустое!")
+    } else {
+        const clName = capitalizeFirstLetter(client)
+        fetch(`http://localhost:8082/orders/getcn/${clName}`)
+        .then(response => response.json())
+        .then(orders => {
+            if(orders.length == 0) {
+                const clLastName = capitalizeFirstLetter(client)
+                fetch(`http://localhost:8082/orders/getcl/${clLastName}`)
+                .then(response => response.json())
+                .then(orderss => {
+                    if(orderss.length == 0) {
+                        catchErrors("Информация не найдена!")
+                    } else {
+                        createTableOrders(ordersTable, orderss)
+                    }
+                })
+            } else {
+                createTableOrders(ordersTable, orders)
+            }
+        })
+    }
+}
+
 // by date
+function showOrdersByDay() {
+    const date = document.getElementById("date").value
+
+    if(date == "") {
+        catchErrors("Поле ввода даты пустое!")
+    } else { // check format
+        fetch(`http://localhost:8082/orders/getd/${date}`)
+        .then(response => response.json())
+        .then(orders => {
+            if(orders.length == 0) {
+                catchErrors("Информация не найдена!")
+            } else {
+                createTableOrders(ordersTable, orders)
+            }
+        })
+    }
+}
 
 function createTableOrders(table, data) {
     console.log(data)
 
     table.innerHTML = ""
+    const form = document.getElementById("edit")
+    form.innerHTML = ""
+    const message = document.getElementById("message")
+    message.innerHTML = ""
 
     for(let i = 0; i < data.length; i++) {
         const tr = document.createElement("tr", {class: "d-flex"}) // <tr>
@@ -65,4 +143,21 @@ function deleteOrder(id) {
 
 function editOrder(id){
     fetch(`http:localhost:8082/orders/get/${id}`)
+}
+
+function catchErrors(textErr) {
+    const message = document.getElementById("message")
+    console.log("message", message)
+    text = "<div class='alert alert-danger' role='alert'>"
+    text += textErr
+    text += "</div>"
+    message.innerHTML = text
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function toLower(string) {
+    return string.toLowerCase();
 }

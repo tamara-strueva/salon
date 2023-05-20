@@ -1,14 +1,23 @@
 package com.salon.salon;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.salon.salon.exceptions.MasterNotFoundException;
+import com.salon.salon.exceptions.CustomNotFoundExсeption;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
     // Обработчик вызываемых в контроллерах ошибок
-    // @ExceptionHandler(ClientNotFoundException.class)
-    // public ResponseEntity<String> handleClientNotFoundException(ClientNotFoundException ex){
-    //     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    // }
+    @ExceptionHandler(MasterNotFoundException.class)
+    public ResponseEntity<String> handleClientNotFoundException(MasterNotFoundException ex){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
 
     // @ExceptionHandler(ObjectNotFoundException.class)
     // public ResponseEntity<String> handleObjectNotFoundException(ObjectNotFoundException ex){
@@ -30,12 +39,12 @@ public class GlobalExceptionHandler {
     //     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     // }
 
-    // @ExceptionHandler(CustomNotFoundException.class)
-    // // Метод возвращает статус и сообщение об ошибке. Обернуто в map, чотобы не вызывать ошибку со статусом
-    // public ResponseEntity<Map<String, String>> handleCustomNotFoundException(CustomNotFoundException ex){
-    //     Map<String, String> errorResponse = new HashMap<>();
-    //     errorResponse.put("ERROR:", ex.getMessage());
-    //     return ResponseEntity.status(ex.getStatus()).body(errorResponse);
-    // }
+    @ExceptionHandler(CustomNotFoundExсeption.class)
+    // Метод возвращает статус и сообщение об ошибке. Обернуто в map, чотобы не вызывать ошибку со статусом
+    public ResponseEntity<Map<String, String>> handleCustomNotFoundException(CustomNotFoundExсeption ex){
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("ERROR:", ex.getMessage());
+        return ResponseEntity.status(ex.getHttpStatus()).body(errorResponse);
+    }
     
 }

@@ -13,6 +13,6 @@ public interface ServiseRepository extends JpaRepository<Servise, Integer> {
     List<Servise> findByNameContaining(String name);
 
     @Modifying 
-    @Query(value = "insert into service_order (order_id, service_id) VALUES(:order_id, :service_id)", nativeQuery = true) 
+    @Query(value = "INSERT INTO service_order (order_id, service_id) VALUES(:order_id, :service_id)", nativeQuery = true) 
     public void insertRelationTable(@Param("order_id") int orderId, @Param("service_id") int serviceId);
 }

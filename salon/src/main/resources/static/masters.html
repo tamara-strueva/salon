@@ -22,10 +22,9 @@
                     <th><input type="text" placeholder="Имя" id="firstName"></th> 
                     <th><input type="text" placeholder="Фамилия" id="lastName"></th>
                     <th><input type="text" placeholder="Специальность" id="speciality"></th> 
-                    <th>Опыт работы</th>
+                    <th>Ставка</th>
                     <th>Действия</th>
                 </tr>
-                    <!--как выводить график работы и доюавить кнопки (удалить редактировать новая запись)-->
                 </thead>
                 <tbody id="mastersTableBody">
                     <script src="./js/showAllMasters.js"></script>
@@ -37,11 +36,15 @@
                 <button type="button" class="btn btn-secondary" onclick="showMastersByName()">По имени</button>
                 <button type="button" class="btn btn-secondary" onclick="showMastersByLastName()">По фамилии</button>
                 <button type="button" class="btn btn-secondary" onclick="showMastersBySpeciality()">По специальности</button>
+                <button type="button" class="btn btn-secondary" onclick="showMastersByNameAndSpeciality()">По имени и специальности</button>
                 <button type="button" class="btn btn-secondary" onclick="showMastersList()">Все мастера</button>
             </div>
         </div>
 
-        <div  id="edit">
+        <div id="edit">
+
+        </div>
+        <div id="message">
 
         </div>
 

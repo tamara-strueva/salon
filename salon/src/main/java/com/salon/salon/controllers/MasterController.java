@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.salon.salon.exceptions.CustomNotFoundExсeption;
-import com.salon.salon.exceptions.MasterNotFoundException;
-// import com.salon.salon.exeptions.MasterNotFoundException;
 import com.salon.salon.models.Master;
 import com.salon.salon.services.MasterService;
 
@@ -42,7 +40,7 @@ public class MasterController {
         try{
             Master master = masterService.getMasterById(id);
             return ResponseEntity.ok(master);
-        } catch (MasterNotFoundException exception) {
+        } catch (NoSuchElementException exception) {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with ID: " + id + "doesn't exist...");
         }
     }
@@ -52,7 +50,7 @@ public class MasterController {
         try{
             List<Master> masters = masterService.getMastersByName(name);
             return ResponseEntity.ok(masters);
-        } catch (MasterNotFoundException exception) {
+        } catch (NoSuchElementException exception) {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with NAME: " + name + "doesn't exist...");
         }
     }
@@ -62,7 +60,7 @@ public class MasterController {
         try{
             List<Master> masters = masterService.getMasterByLastName(name);
             return ResponseEntity.ok(masters);
-        } catch (MasterNotFoundException exception) {
+        } catch (NoSuchElementException exception) {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with LASTNAME: " + name + "doesn't exist...");
         }
     }
@@ -72,8 +70,18 @@ public class MasterController {
         try{
             List<Master> masters = masterService.getMastersBySpeciality(speciality);
             return ResponseEntity.ok(masters);
-        } catch (MasterNotFoundException exception) {
+        } catch (NoSuchElementException exception) {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with SPECIALITY: " + speciality + "doesn't exist...");
+        }
+    }
+
+    @GetMapping("/getns/{name}/{speciality}")
+    public ResponseEntity<?> getMastersByNameAndSpeciality(@PathVariable String name, @PathVariable String speciality) {
+        try {
+            List<Master> masters = masterService.getMastersByNameAndSpeciality(name, speciality);
+            return ResponseEntity.ok(masters);
+        } catch (NoSuchElementException exception) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with NAME: " + name + " and SPECIALITY: " + speciality + "doesn't exist...");
         }
     }
 

@@ -32,12 +32,11 @@ public class Master {
     private String speciality;
 
     @Column(name = "work_experience")
-    private String workExperience = "0";
+    private Integer workExperience;
 
     @Column(name = "rate")
-    private Float rate;
+    private Float rate = 1F;
 
-    // многие ко многим???
     @JsonIgnore
     @OneToMany(mappedBy = "master")
     private List<Schedule> schedules;

@@ -22,6 +22,7 @@
                     <th><input type="text" placeholder="Название" id="name"></th>
                     <th>Продолжительность</th>
                     <th>Цена</th>
+                    <th>Действия</th>
                 </tr>
             </thead>
             <tbody id="servicesTableBody">
@@ -30,8 +31,16 @@
         </table>
 
         <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-success" onclick=""><a href="" target="_blank">Добавить услугу</a></button>
             <button type="button" class="btn btn-secondary" onclick="showServicesByName()">По названию</button>
             <button type="button" class="btn btn-secondary" onclick="showServicesList()">Все</button>
+        </div>
+
+        <div  id="edit">
+
+        </div>
+        <div id="message">
+
         </div>
 
     </body>    

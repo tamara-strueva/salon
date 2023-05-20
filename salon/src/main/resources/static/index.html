@@ -11,7 +11,7 @@
             <a class="nav-link disabled" href="#!">Главная</a>
             <a class="nav-link active" href="./masters.html">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
             <a class="nav-link active" href="./services.html">Услуги</a> <!-- ссылка на просмотр всех услуг -->
-            <a class="nav-link active" href="./clients.html">Клиенты</a>
+            <!-- <a class="nav-link active" href="./clients.html">Клиенты</a> -->
         </nav>
 
         <div class="container-fluid">
@@ -36,11 +36,18 @@
         -->
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="button" class="btn btn-outline-success"><a href="./createForm.html" target="_blank">Новая запись</a></button>
-            <button type="button" class="btn btn-secondary" onclick="">По мастеру</button>
-            <button type="button" class="btn btn-secondary" onclick="">По клиенту</button>
+            <button type="button" class="btn btn-secondary" onclick="showOrdersByMaster()">По мастеру</button>
+            <button type="button" class="btn btn-secondary" onclick="showOrdersByClient()">По клиенту</button>
             <button type="button" class="btn btn-secondary" onclick="">По услуге</button>
-            <button type="button" class="btn btn-secondary" onclick="">По дате</button>
+            <button type="button" class="btn btn-secondary" onclick="showOrdersByDay()">По дате</button>
             <button type="button" class="btn btn-secondary" onclick="showOrdersList()">Все данные</button>
+        </div>
+
+        <div id="edit">
+
+        </div>
+        <div id="message">
+
         </div>
 
     </body>

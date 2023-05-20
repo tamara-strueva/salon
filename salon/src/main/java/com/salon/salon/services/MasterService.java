@@ -47,5 +47,9 @@ public class MasterService {
     public List<Master> getMastersBySpeciality(String speciality) {
         return masterRepository.findBySpeciality(speciality);
     }
+
+    public List<Master> getMastersByNameAndSpeciality(String name, String speciality) {
+        return masterRepository.findByFirstNameAndSpeciality(name, speciality);
+    }
     
 }

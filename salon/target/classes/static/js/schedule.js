@@ -1,7 +1,9 @@
 function getScheduleByMaster() {
+
+    // ввод 1 имя 2 специальность
+
     const master = document.getElementById("master").value
-    // const masterName = master
-    // console.log(master)
+
     const masterFullName = master.split(" ")
     const masterLastName = masterFullName[0]
     const masterName = masterFullName[1]
@@ -9,9 +11,9 @@ function getScheduleByMaster() {
     const nmasterName = capitalizeFirstLetter(masterName)
     console.log(nmasterLastName, nmasterName)
 
-    fetch(`http://localhost:8082/schedules/getm/${nmasterName}/${nmasterLastName}`)
-    .then(response => response.json())
-    .then(schedule => createTableMasters(scheduleTable, schedule, master))
+    // fetch(`http://localhost:8082/schedules/getm/${nmasterName}/${nmasterLastName}`)
+    // .then(response => response.json())
+    // .then(schedule => createTableMasters(scheduleTable, schedule, master))
     // .then(schedule => console.log(schedule))
 }
 const scheduleTable = document.getElementById("schedulesTableBody")

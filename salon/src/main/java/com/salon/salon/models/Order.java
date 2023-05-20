@@ -3,6 +3,7 @@ package com.salon.salon.models;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ public class Order {
     private Client client;
 
     @ManyToMany(mappedBy = "orders", targetEntity = Servise.class, cascade=CascadeType.MERGE)
-    private List<Servise> services;
+    private Set<Servise> services;
 
     @Column(name = "day")
     private Date day;
@@ -47,6 +48,7 @@ public class Order {
     @Column(name = "date_of_creation")
     private Date dateOfCreation;
 
+    // delete
     @Column(name = "date_of_edit")
     private Date dateOfEdit;
 
@@ -57,22 +59,10 @@ public class Order {
         if(order.client != null) {
             this.client = order.client;
         }
-        // if(order.services != null){
+        if(order.services != null){
             // this.services.addAll(order.services);
-            // this.setNewServises(order.getServices());
-            // for(Servise servise: order.getServices()) {
-            //     servise.addNewOrder(this);
-            // }
-            // List<Servise> newList = Stream.concat(this.services.stream(), order.services.stream()).collect(Collectors.toList());
-            // this.services = newList;
-
-            // for(int i = 0; i < order.services.size(); i++) {
-            //     this.services.add(order.services.get(i));
-            // }
-            // for(Servise servise: order.services) {
-            //     this.services.add(servise);
-            // }
-        // }
+            this.services = order.services;
+        } 
         if(order.day != null) {
             this.day = order.day;
         }
@@ -90,3 +80,17 @@ public class Order {
         }
     }
 }
+
+// this.setNewServises(order.getServices());
+// for(Servise servise: order.getServices()) {
+//     servise.addNewOrder(this);
+// }
+// List<Servise> newList = Stream.concat(this.services.stream(), order.services.stream()).collect(Collectors.toList());
+// this.services = newList;
+
+// for(int i = 0; i < order.services.size(); i++) {
+//     this.services.add(order.services.get(i));
+// }
+// for(Servise servise: order.services) {
+//     this.services.add(servise);
+// }

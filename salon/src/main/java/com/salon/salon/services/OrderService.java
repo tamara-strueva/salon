@@ -1,11 +1,13 @@
 package com.salon.salon.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.salon.salon.models.Client;
+import com.salon.salon.models.Master;
 import com.salon.salon.models.Order;
 import com.salon.salon.repositories.OrderRepository;
 
@@ -35,6 +37,14 @@ public class OrderService {
 
     public List<Order> getOrderByClient(Client client) {
         return orderRepository.findByClient(client);
+    }
+
+    public List<Order> getByMaster(Master master) {
+        return orderRepository.findByMaster(master);
+    }
+
+    public List<Order> getOrderByDay(Date day) {
+        return orderRepository.findByDay(day);
     }
     
 }
