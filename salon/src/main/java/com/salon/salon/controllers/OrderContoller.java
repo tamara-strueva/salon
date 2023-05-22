@@ -2,12 +2,12 @@ package com.salon.salon.controllers;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +27,6 @@ import com.salon.salon.models.Servise;
 import com.salon.salon.services.ClientService;
 import com.salon.salon.services.MasterService;
 import com.salon.salon.services.OrderService;
-import com.salon.salon.services.ServiseService;
 
 @RestController
 @RequestMapping("/orders")
@@ -36,8 +35,8 @@ public class OrderContoller {
     private OrderService orderService;
     @Autowired
     private ClientService clientService;
-    @Autowired
-    private ServiseService serviseService;
+    // @Autowired
+    // private ServiseService serviseService;
     @Autowired
     private MasterService masterService;
 
@@ -127,17 +126,19 @@ public class OrderContoller {
     @PostMapping("/add")
     public void saveOrder(@RequestBody Order order) {      
         try{
-            orderService.saveOrder(order);
-            if(order.getServices() != null) {
-                Set<Servise> servises = order.getServices();
-                for(Servise servise: servises) {
-                    serviseService.insertRelationTable(order, servise);
+            Set<Servise> services = order.getServices();
+            if(!services.isEmpty()) {
+                order.setServices(services);
+                // orderService.saveOrder(order);
+                for(Servise servise: services) {
+                    servise.getOrders().add(order);
                 }
+                orderService.saveOrder(order);
+            } else {
+                orderService.saveOrder(order);
             }
-        } catch (DataIntegrityViolationException exception) {
-            // Client client = order.getClient();
-            // clientService.saveClient(client);
-            // orderService.saveOrder(order);
+        } catch (NoSuchElementException exception) {
+            
         }
     }
 
@@ -153,12 +154,12 @@ public class OrderContoller {
             // новая услуга должна сохраниться в результирующую таблицу manytomany
             Order baseOrder = orderService.getOrderById(id);
             baseOrder.updateOrder(order);
-            if(order.getServices() != null) {
-                Set<Servise> servisesToAdd = order.getServices();
-                for(Servise servise: servisesToAdd) {
-                    serviseService.insertRelationTable(baseOrder, servise);
-                }
-            }
+            // if(order.getServices() != null) {
+                // Set<Servise> servisesTodd = order.getServices();
+                // for(Servise servise: servisesToAdd) {
+                    // serviseService.insertRelationTable(baseOrder, servise);
+                // }
+            // }
             // log.info("1 LIST {}", baseOrder.getServices().get(0).getOrders());
             // log.info("2 LIST {}", baseOrder.getServices());
             orderService.saveOrder(baseOrder);

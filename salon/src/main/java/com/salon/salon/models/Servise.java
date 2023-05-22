@@ -1,25 +1,28 @@
 package com.salon.salon.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+// import lombok.AllArgsConstructor;
 import lombok.Data;
+// import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="services")
 @Data
+// @NoArgsConstructor
+// @AllArgsConstructor
 public class Servise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,15 +39,39 @@ public class Servise {
     private Integer duration;
 
     @Column(name = "base_price")
-    private Float basePrice;
+    private Integer basePrice;
 
     // связь с таблицей заказа (там колонка - внешний ключ)
+    // @JsonIgnore
+    // @ManyToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity = Order.class)
+    // private Set<Order> orders = new HashSet<>();
     @JsonIgnore
-    @ManyToMany(cascade=CascadeType.MERGE)
-    @JoinTable(name = "service_order",
-        joinColumns = @JoinColumn(name = "service_id", referencedColumnName = "id"),
-        inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
-    private List<Order> orders = new ArrayList<>();
+    @ManyToMany(mappedBy = "services", cascade = CascadeType.ALL)
+    Set<Order> orders = new HashSet<Order>(0);
+
+    // public void setId(Integer id) {this.id = id;}
+
+    // public int getId() {return this.id;}
+
+    // public void setName(String name) {this.name = name;}
+
+    // public String getName() {return this.name;}
+
+    // public void setDescription(String description) {this.description = description;}
+
+    // public String getDescription() {return this.description;}
+
+    // public void setDuration(Integer duration) {this.duration = duration;}
+
+    // public Integer getDuration() {return this.duration;}
+
+    // public void setBasePrice(Integer basePrice) {this.basePrice = basePrice;}
+
+    // public int getPasePrice() {return this.basePrice;}
+
+    // public void setOrders(Set<Order> orders) {this.orders = orders;}
+
+    // public Set<Order> getOrders() {return this.orders;}
 
     public void updateServise(Servise servise) {
         if(servise.name != null) {
@@ -61,7 +88,7 @@ public class Servise {
         }
     }
     
-    public void addNewOrder(Order newOrder) {
-        this.orders.add(newOrder);
-    }
+    // public void addNewOrder(Order newOrder) {
+    //     this.orders.add(newOrder);
+    // }
 }

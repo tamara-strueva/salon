@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.salon.salon.models.Order;
 import com.salon.salon.models.Servise;
 import com.salon.salon.repositories.ServiseRepository;
 
@@ -37,8 +36,8 @@ public class ServiseService {
         return serviseRepository.findByNameContaining(name);
     }
 
-    public void insertRelationTable(Order order, Servise servise) {
-        serviseRepository.insertRelationTable(order.getId(), servise.getId());
-    }
+    // public void insertRelationTable(Order order, Servise servise) {
+    //     serviseRepository.insertRelationTable(order.getId(), servise.getId());
+    // }
     
 }
