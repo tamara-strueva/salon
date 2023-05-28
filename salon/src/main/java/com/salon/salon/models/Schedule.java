@@ -13,15 +13,24 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * Класс, представляющий модель графика, который имеет отображение в таблице schedules бд 
+ */
 @Entity
 @Table(name = "schedules")
 @Data
 public class Schedule {
+    /**
+     * Первичный ключ таблицы, гененрируется в бд
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    /**
+     * Столбец связи графика с мастером
+     */
     @ManyToOne
     @JoinColumn(name = "master_schedule_id")
     private Master master;
@@ -35,8 +44,12 @@ public class Schedule {
     @Column(name="time_end")
     private Time timeEnd;
     
+    /**
+     * Метод редактирования графика
+     * @param schedule принимаемый параметр, с которым будет сравниваться редактируемый объект
+     */
     public void updateSchedule(Schedule schedule) {
-        if(schedule.master != null) {
+        if(schedule.master != null) { 
             this.master = schedule.master;
         }
         if(schedule.day != null) {

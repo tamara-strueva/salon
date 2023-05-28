@@ -50,6 +50,11 @@ public class ServiseController {
         return serviceService.getServisesByName(name);
     }
 
+    @GetMapping("/getone/{name}")
+    public Servise getOneServiseByName(@PathVariable String name) {
+        return serviceService.getServiseByName(name);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteServiseById(@PathVariable Integer id) {
         serviceService.deleteServiseById(id);

@@ -13,39 +13,57 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+/**
+ * Класс, представляющий модель мастера, который имеет отображение в таблице masters бд 
+ */
 @Entity
 @Table(name = "masters")
 @Data
 public class Master {
+    /**
+     * Первичный ключ таблицы, гененрируется в бд
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    /**
+     * Столбец имени мастера
+     */
     @Column(name = "first_name")
     private String firstName;
 
+    /**
+     * Столбец фамилии мастера
+     */
     @Column(name = "last_name")
     private String lastName;
 
+    /**
+     * Столбец специальности мастера
+     */
     @Column(name = "speciality")
     private String speciality;
 
-    @Column(name = "work_experience")
-    private Integer workExperience;
-
-    @Column(name = "rate")
-    private Float rate = 1F;
-
+    /**
+     * Связь с таблицей графика работы (внешний ключ)
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "master")
     private List<Schedule> schedules;
 
-    // связь с таблицей заказа (там колонка - внешний ключ)
+    /**
+     * Связь с таблицей заказов (внешний ключ)
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "master")
     private List<Order> orders;
 
+    /**
+     * Метод редактирования мвстера
+     * @param master принимаемый параметр, с которым будет сравниваться редактируемый объект
+     */
     public void updateMaster(Master master) {
         if(master.firstName != null) {
             this.firstName = master.firstName;
@@ -55,12 +73,6 @@ public class Master {
         }
         if(master.speciality != null) {
             this.speciality = master.speciality;
-        }
-        if(master.workExperience != null) {
-            this.workExperience = master.workExperience;
-        }
-        if(master.rate != null) {
-            this.rate = master.rate;
         }
         if(master.schedules != null) {
             this.schedules = master.schedules;

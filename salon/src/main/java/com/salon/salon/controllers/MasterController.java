@@ -74,7 +74,7 @@ public class MasterController {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with SPECIALITY: " + speciality + "doesn't exist...");
         }
     }
-
+ 
     @GetMapping("/getns/{name}/{speciality}")
     public ResponseEntity<?> getMastersByNameAndSpeciality(@PathVariable String name, @PathVariable String speciality) {
         try {
@@ -82,6 +82,16 @@ public class MasterController {
             return ResponseEntity.ok(masters);
         } catch (NoSuchElementException exception) {
             throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with NAME: " + name + " and SPECIALITY: " + speciality + "doesn't exist...");
+        }
+    }
+
+    @GetMapping("/getfl/{name}/{lastName}")
+    public ResponseEntity<?> getMastersByFullName(@PathVariable String name, @PathVariable String lastName) {
+        try {
+            List<Master> masters = masterService.getMasterByFirstAndLastName(name, lastName);
+            return ResponseEntity.ok(masters);
+        } catch (NoSuchElementException exception) {
+            throw new CustomNotFoundExсeption(HttpStatus.NOT_FOUND, "Master with NAME: " + name + " " + lastName + "doesn't exist...");
         }
     }
 

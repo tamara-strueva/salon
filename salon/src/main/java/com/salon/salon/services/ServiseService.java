@@ -36,6 +36,11 @@ public class ServiseService {
         return serviseRepository.findByNameContaining(name);
     }
 
+    public Servise getServiseByName(String name) {
+        return serviseRepository.findByNameContains(name);
+        
+    }
+
     // public void insertRelationTable(Order order, Servise servise) {
     //     serviseRepository.insertRelationTable(order.getId(), servise.getId());
     // }

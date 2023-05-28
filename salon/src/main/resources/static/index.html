@@ -12,7 +12,7 @@
             <a class="nav-link active" href="./masters.html">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
             <a class="nav-link active" href="./services.html">Услуги</a> <!-- ссылка на просмотр всех услуг -->
             <!-- <a class="nav-link active" href="./clients.html">Клиенты</a> -->
-        </nav>
+        </nav> 
 
         <div class="container-fluid">
             <table class="table table-sm" id="ordersTable" height="100%" width="100%">
@@ -21,7 +21,9 @@
                     <th><input type="text" placeholder="Мастер" id="master"></th> 
                     <th><input type="text" placeholder="Клиент" id="client"></th>
                     <th><input type="text" placeholder="Услуга" id="service"></th> 
-                    <th><input type="text" placeholder="Дата" id="date"></th>
+                    <th><input type="date" placeholder="Дата" id="date"></th>
+                    <th>Начало</th>
+                    <th>Конец</th>
                     <th>Действия</th>
                 </tr>
                 </thead>
@@ -38,7 +40,7 @@
             <button type="button" class="btn btn-outline-success"><a href="./createForm.html" target="_blank">Новая запись</a></button>
             <button type="button" class="btn btn-secondary" onclick="showOrdersByMaster()">По мастеру</button>
             <button type="button" class="btn btn-secondary" onclick="showOrdersByClient()">По клиенту</button>
-            <button type="button" class="btn btn-secondary" onclick="">По услуге</button>
+            <button type="button" class="btn btn-secondary" onclick="showOrdersByService()">По услуге</button>
             <button type="button" class="btn btn-secondary" onclick="showOrdersByDay()">По дате</button>
             <button type="button" class="btn btn-secondary" onclick="showOrdersList()">Все данные</button>
         </div>

@@ -1,7 +1,10 @@
 package com.salon.salon.services;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.salon.salon.models.Client;
 import com.salon.salon.models.Master;
 import com.salon.salon.models.Order;
+import com.salon.salon.models.Servise;
 import com.salon.salon.repositories.OrderRepository;
 
 import jakarta.transaction.Transactional;
@@ -46,5 +50,16 @@ public class OrderService {
     public List<Order> getOrderByDay(Date day) {
         return orderRepository.findByDay(day);
     }
-    
+
+    public List<Order> getOrderByServise(Servise service) {
+        Set<Servise> servises = new HashSet<>();
+        servises.add(service);
+        return orderRepository.findByServicesIn(servises);
+    }
+
+    public List<Order> getOrdersByServiseList(List<Servise> servisesList) {
+        Set<Servise> servisesSet = servisesList.stream().collect(Collectors.toSet());
+        return orderRepository.findByServicesIn(servisesSet);
+    }
+
 }

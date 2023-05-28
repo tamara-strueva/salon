@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html> 
     <head>
         <title>New</title>
         <meta charset="utf-8">
@@ -8,7 +8,8 @@
     </head>
     <body>
         <h3>Новая запись</h3>
-        
+        <button onclick="drawAllServicesList()">show services</button>
+        <div id="message"></div>
         <form id="form">
             <h5>Информация о клиенте</h5>
             <div class="form-group">
@@ -18,78 +19,58 @@
             <div class="form-group"> -->
                 <input type="text" class="form-control" id="clientPhone" placeholder="Номер телефона (формат: +7 (999)-999 99 99)">
                 <!-- pattern="+79[0-9]{9}" -->
+                <input type="date" class="form-control" id="clientBirthdate" placeholder="Дата рождения">
             </div>
 
             <h5>Выбор услуги</h5>
-            <div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck1" name="service">
-                    <label class="custom-control-label" for="customCheck1">Стрижка</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck2" name="service">
-                    <label class="custom-control-label" for="customCheck1">Укладка</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck3" name="service">
-                    <label class="custom-control-label" for="customCheck1">Классический маникюр</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck4" name="service">
-                    <label class="custom-control-label" for="customCheck1">Аппаратный маникюр</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck5" name="service">
-                    <label class="custom-control-label" for="customCheck1">Покрытие</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck6" name="service">
-                    <label class="custom-control-label" for="customCheck1">Коррекция бровей</label>
-                </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="customCheck7" name="service">
-                    <label class="custom-control-label" for="customCheck1">Окрашивание бровей</label>
-                </div>
-            </div>
-            
+            <!-- <button onclick="drawAllServicesList()">show</button> -->
+            <div id="list"></div>
+
             <h5>Информация о мастере/услуге</h5>
             <div class="form-group">
                 <input type="text" class="form-control" id="masterLastName" placeholder="Фамилия мастера">
                 <input type="text" class="form-control" id="masterFirstName" placeholder="Имя мастера">
             </div>
-            <!-- <div class="form-group">
-                <input type="text" class="form-control" id="clientPhone" placeholder="Услуга">
-            </div> -->
 
             <!--время записи-->
-
+            <h5>Дата и время записи</h5>
+            <div>
+                <input type="date" class="form-control" id="day" placeholder="Дата записи">
+                <input type="time" class="form-control" id="time" placeholder="Время записи">
+            </div>
+            
             <script src="./js/create.js"></script>
             <button type="submit" class="btn btn-success">Добавить</button>
-            <!--кнопка - конец формы-->
+            <!-- <div id="price"> -->
+                <!-- <button type="button" class="btn btn-success">Цена</button> -->
+            <!-- </div> -->
         </form>
 
-        <div class="container-fluid">
+        <!-- <div class="container-fluid">
             <h4>Мастера</h4>
-            <table class="table table-sm" id="mastersTable" height="100%" width="100%">
-                <thead>
-                    <!-- <tr> <th>id</th> <th><input type="text" placeholder="Имя"></th> <th>Специальность</th> </tr> -->
-                <tr> <th>id</th> 
-                    <th><input type="text" placeholder="Имя" id="firstName"></th> 
-                    <th><input type="text" placeholder="Фамилия" id="lastName"></th>
-                    <th><input type="text" placeholder="Специальность" id="speciality"></th> 
-                    <th>Опыт работы</th></tr>
-                    <!--как выводить график работы и добавить кнопки (удалить редактировать новая запись)-->
-                </thead>
-                <tbody id="mastersTableBody">
-                    <script src="./js/showAllMasters.js"></script>
-                </tbody>
-            </table>
-
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary" onclick="showMastersByName()">По имени</button>
-                <button type="button" class="btn btn-secondary" onclick="showMastersByLastName()">По фамилии</button>
-                <button type="button" class="btn btn-secondary" onclick="showMastersBySpeciality()">По специальности</button>
-                <button type="button" class="btn btn-secondary" onclick="showMastersList()">Все</button>
+            <div class="container-fluid">
+                <table class="table table-sm" id="mastersTable" height="100%" width="100%">
+                    <thead>
+                    <tr> <th>id</th> 
+                        <th><input type="text" placeholder="Имя" id="firstName"></th> 
+                        <th><input type="text" placeholder="Фамилия" id="lastName"></th>
+                        <th><input type="text" placeholder="Специальность" id="speciality"></th> 
+                        <th>Действия</th>
+                    </tr>
+                    </thead>
+                    <tbody id="mastersTableBody">
+                        <script src="./js/showAllMasters.js"></script>
+                    </tbody>
+                </table>
+    
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-outline-success"><a href="./createMaster.html" target="_blank">Добавить мастера</a></button>
+                    <button type="button" class="btn btn-secondary" onclick="showMastersByName()">По имени</button>
+                    <button type="button" class="btn btn-secondary" onclick="showMastersByLastName()">По фамилии</button>
+                    <button type="button" class="btn btn-secondary" onclick="showMastersBySpeciality()">По специальности</button>
+                    <button type="button" class="btn btn-secondary" onclick="showMastersByNameAndSpeciality()">По имени и специальности</button>
+                    <button type="button" class="btn btn-secondary" onclick="showMastersList()">Все мастера</button>
+                </div>
             </div>
             <button><a href="./schedule.html" target="_blank">расписание</a></button>
 
@@ -103,6 +84,7 @@
                         <th><input type="text" placeholder="Название" id="name"></th>
                         <th>Продолжительность</th>
                         <th>Цена</th>
+                        <th>Действия</th>
                     </tr>
                 </thead>
                 <tbody id="servicesTableBody">
@@ -111,10 +93,11 @@
             </table>
     
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-secondary" onclick="showServicesByName()">По имени</button>
+                <button type="button" class="btn btn-outline-success"><a href="./createService.html" target="_blank">Добавить услугу</a></button>
+                <button type="button" class="btn btn-secondary" onclick="showServicesByName()">По названию</button>
                 <button type="button" class="btn btn-secondary" onclick="showServicesList()">Все</button>
             </div>
-        </div>
+        </div> -->
 
     </body>
 </html>

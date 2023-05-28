@@ -2,7 +2,6 @@ package com.salon.salon.controllers;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -27,6 +26,7 @@ import com.salon.salon.models.Servise;
 import com.salon.salon.services.ClientService;
 import com.salon.salon.services.MasterService;
 import com.salon.salon.services.OrderService;
+import com.salon.salon.services.ServiseService;
 
 @RestController
 @RequestMapping("/orders")
@@ -35,8 +35,8 @@ public class OrderContoller {
     private OrderService orderService;
     @Autowired
     private ClientService clientService;
-    // @Autowired
-    // private ServiseService serviseService;
+    @Autowired
+    private ServiseService serviseService;
     @Autowired
     private MasterService masterService;
 
@@ -123,13 +123,18 @@ public class OrderContoller {
         return orderService.getOrderByDay(day);
     }
 
+    @GetMapping("/getsn/{serviseName}")
+    public List<Order> getOrdersByServiseName(@PathVariable String serviseName) {
+        List<Servise> servises = serviseService.getServisesByName(serviseName);
+        return orderService.getOrdersByServiseList(servises); 
+    }
+
     @PostMapping("/add")
     public void saveOrder(@RequestBody Order order) {      
         try{
             Set<Servise> services = order.getServices();
             if(!services.isEmpty()) {
                 order.setServices(services);
-                // orderService.saveOrder(order);
                 for(Servise servise: services) {
                     servise.getOrders().add(order);
                 }
@@ -151,17 +156,8 @@ public class OrderContoller {
     @PutMapping("/edit/{id}")
     public ResponseEntity<Order> updateOrder(@RequestBody Order order, @PathVariable Integer id) {
         try{
-            // новая услуга должна сохраниться в результирующую таблицу manytomany
             Order baseOrder = orderService.getOrderById(id);
             baseOrder.updateOrder(order);
-            // if(order.getServices() != null) {
-                // Set<Servise> servisesTodd = order.getServices();
-                // for(Servise servise: servisesToAdd) {
-                    // serviseService.insertRelationTable(baseOrder, servise);
-                // }
-            // }
-            // log.info("1 LIST {}", baseOrder.getServices().get(0).getOrders());
-            // log.info("2 LIST {}", baseOrder.getServices());
             orderService.saveOrder(baseOrder);
             return ResponseEntity.ok(baseOrder);
         } catch(NoSuchElementException exception) {

@@ -24,14 +24,6 @@ function showMastersByName() {
     }
 }
 
-function catchErrors(textErr) {
-    const message = document.getElementById("message")
-    console.log("message", message)
-    text = "<div class='alert alert-danger' role='alert'>"
-    text += textErr
-    text += "</div>"
-    message.innerHTML = text
-}
 
 function showMastersByLastName() {
     const lname = document.getElementById("lastName").value
@@ -121,9 +113,9 @@ function createTableMasters(table, data) {
         td2.innerHTML = data[i].speciality
         tr.appendChild(td2)
 
-        const td4 = document.createElement("td")
-        td4.innerHTML = data[i].rate
-        tr.appendChild(td4)
+        // const td4 = document.createElement("td")
+        // td4.innerHTML = data[i].rate
+        // tr.appendChild(td4)
 
         const td5 = document.createElement("td")
         var button = "<button type='button' class='btn btn-warning' onclick='editMaster(" + data[i].id + ")'>Редактировать</button>"
@@ -156,7 +148,7 @@ function editMaster(id) {
 
 function drawEditForm(master) {
     const div = document.getElementById("edit") // найдет form
-    // draw inputs
+
     var rows = "<form id='editForm'>"
     rows += "<input type='text' class='form-control' id='mLastName' placeholder='Фамилия мастера'>"
     rows += "<input type='text' class='form-control' id='mFirstName' placeholder='Имя мастера'>"
@@ -213,4 +205,13 @@ function editConfirm(id) {
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function catchErrors(textErr) {
+    const message = document.getElementById("message")
+    console.log("message", message)
+    text = "<div class='alert alert-danger' role='alert'>"
+    text += textErr
+    text += "</div>"
+    message.innerHTML = text
 }

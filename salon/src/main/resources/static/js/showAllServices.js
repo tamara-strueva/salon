@@ -4,7 +4,7 @@ function showServicesList() {
     .then(services => createTableServices(servicesTable, services));
 }
 const servicesTable = document.getElementById('servicesTableBody')
-
+ 
 function showServicesByName() {
     const sname = document.getElementById("name").value
     if(sname == "") {
@@ -44,7 +44,13 @@ function createTableServices(table, data) {
         tr.appendChild(td1)
 
         const td2 = document.createElement("td")
-        td2.innerHTML = data[i].duration + " мин."
+        if(data[i].duration < 60) {
+            td2.innerHTML = data[i].duration + " мин."
+        } else {
+            let h = Math.floor(data[i].duration/60)
+            let m = data[i].duration%60
+            td2.innerHTML = h + " ч. " + m + " мин."
+        }
         tr.appendChild(td2)
 
         const td3 = document.createElement("td")

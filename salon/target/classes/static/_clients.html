@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Clients</title>
+        <meta charset="utf-8">
+        <meta lang="ru">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="nav">
+            <a class="nav-link active" href="./index.html">Главная</a>
+            <a class="nav-link active" href="./masters.html">Мастера</a> <!-- ссылка на просмотр всех мастеров -->
+            <a class="nav-link active" href="./services.html">Услуги</a> <!-- ссылка на просмотр всех услуг -->
+            <a class="nav-link disabled" href="./clients.html">Клиенты</a>
+            <button class="btn btn-success" type="button" onclick="showClientsList()">show</button>
+        </nav> 
+
+        <table class="table table-striped" id="clientsTable">
+            <thead>
+              <tr> <th>id</th> <th><input type="text" placeholder="Имя"></th> <th>Фамилия</th> </tr>
+            </thead>
+            <tbody id="clientsTableBody">
+                <script src="./js/showAllClients.js"></script>
+            </tbody>
+          </table>
+    </body>
+</html>
